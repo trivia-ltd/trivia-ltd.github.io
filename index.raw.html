@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+
+    <!-- Disable 300ms delay in Chrome and Firefox -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="preconnect" href="https://fonts.bunny.net">
+	<link href="https://fonts.bunny.net/css?family=bagel-fat-one:400" rel="stylesheet" />
+
+    <!-- HTML5shiv: HTML5 elements for older versions of IE -->
+    <!-- respond.js: media-queries for older versions of IE -->
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" integrity="sha256-3Jy/GbSLrg0o9y5Z5n1uw0qxZECH7C6OQpVBgNFYa0g=" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js" integrity="sha256-g6iAfvZp+nDQ2TdTR/VVKJf3bGro4ub5fvWSWVRi2NE=" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js" integrity="sha512-RCtZMoZSQ5csGk1zBPGImR8OY+NJfe0IsaFrDD649yYrSBgCf3kYiP79AfWT9/idKbpWYteQmswChxbXC7YHig==" crossorigin="anon>
+    <![endif]-->
+
+    <title>trivia.ltd</title>
+
+    <style>
+/* Disable 300 millisecond delay in IE */
+html{touch-action:manipulation;-ms-touch-action:manipulation}
+
+/* Remove default margin */
+/* h1, h2, h3, h4, p, ul[class], ol[class], li, figure, figcaption, blockquote, dl, dd */
+h1, h2, p, ul[class], ol[class], li, {
+    margin: 0;
+}
+
+/* Normalize */
+
+/* [type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring,button:-moz-focusring{outline:1px dotted ButtonText;outline-offset:-2px}h1{margin:.67em 0} */
+html {
+    line-height:1.15;
+    -webkit-text-size-adjust:100%
+}
+
+body {
+    margin:0;
+    /* height: 175vh; */
+}
+
+/*
+main {
+    display:block
+}
+*/
+
+/*
+hr {
+    box-sizing:content-box;height:0;overflow:visible
+}
+*/
+
+pre {
+    font-family: monospace, monospace;
+}
+
+a {
+    background-color:transparent
+}
+
+/*
+abbr[title] {
+    border-bottom:none;text-decoration:underline;text-decoration:underline dotted
+}
+*/
+
+b, strong {
+    font-weight:bolder
+}
+
+/*
+code, kbd, samp {
+    font-family:monospace,monospace;font-size:1em
+}
+
+small {
+    font-size:80%
+}
+
+sub, sup {
+    font-size:75%;line-height:0;position:relative;vertical-align:baseline
+}
+
+sub {
+    bottom:-.25em
+}
+
+sup {
+    top:-.5em
+}
+
+img {
+    border-style:none
+}
+
+button, input, optgroup, select, textarea {
+    font-family:inherit;font-size:100%;line-height:1.15;margin:0
+}
+
+button, input {
+    overflow:visible
+}
+
+button, select {
+    text-transform:none
+}
+
+[type=button], [type=reset], [type=submit],button {
+    -webkit-appearance:button
+}
+
+fieldset {
+    padding:.35em .75em .625em
+}
+
+legend {
+    box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal
+}
+
+progress {
+    vertical-align:baseline
+}
+
+textarea {
+    overflow:auto
+}
+
+[type=checkbox], [type=radio] {
+    box-sizing:border-box;padding:0
+}
+
+[type=number]::-webkit-inner-spin-button, [type=number]::-webkit-outer-spin-button {
+    height:auto
+}
+
+[type=search] {
+    -webkit-appearance:textfield;outline-offset:2px
+}
+
+[type=search]::-webkit-search-decoration {
+    -webkit-appearance:none
+}
+
+::-webkit-file-upload-button {
+    -webkit-appearance:button;font:inherit
+}
+
+details {
+    display:block
+}
+
+summary {
+    display:list-item
+}
+
+template {
+    display:none
+}
+
+[hidden] {
+    display:none
+}
+*/
+
+
+/* Semantic UI reset */
+*,*:before,*:after {
+    box-sizing:inherit
+}
+
+html {
+    box-sizing:border-box
+}
+
+input[type="text"],input[type="email"],input[type="search"],input[type="password"] {
+    -webkit-appearance:none;-moz-appearance:none
+}
+
+
+/* ================================================================================ */
+/* Remove all animations and transitions for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* ================================================================================ */
+
+h1,h2,h3,h4,h5,h6 { padding: 0; margin: 0 auto; }
+html,body,div#root { position: relative; }
+body {
+    background: white;
+    overflow-y: scroll;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, Cantarell, Oxygen-Sans, Helvetica, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    color: #333;
+    letter-spacing: 1px;
+    line-height: 2;
+    font-size: 16px;
+}
+
+@media only screen and (min-width:40em) {
+    body {
+        font-size: 17px;
+    }
+}
+
+@media only screen and (min-width:52em) {
+    body {
+        font-size: 18px;
+    }
+}
+
+/* Inherit fonts for inputs and buttons */
+/*
+  input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+*/
+
+/* ================================================================================ */
+/* Ungrid: https://chrisnager.github.io/ungrid/ */
+.col {
+    vertical-align: top;
+}
+@media only screen and (min-width: 40em) {
+    .row { width: 100%; display: table; table-layout: fixed; }
+    .col { display: table-cell; text-align: center; }
+}
+
+p { text-align: left; }
+
+.container {
+    margin: 0 auto 0 auto;
+    padding: 0 1em 0 1em;
+    max-width: 100%;
+}
+
+h1.hero {
+	font-size: 4.5em;
+}
+
+@media only screen and (min-width: 52em){
+    .container {
+        width: 50em;
+    }
+}
+
+@media only screen and (min-width: 64em){
+    .container {
+        width: 59em;
+    }
+	 h1.hero {
+		 font-size: 5em;
+	 }
+}
+
+@media only screen and (min-width: 80em){
+    .container {
+        width: 64em;
+    }
+	 h1.hero {
+		 font-size: 6em;
+	 }
+}
+
+@media only screen and (min-width: 100em){
+    .container {
+        width: 80em;
+    }
+	 h1.hero {
+		 font-size: 8em;
+	 }
+}
+
+/* ================================================================================ */
+/* Misc */
+
+h1.hero {
+	 text-align: center;
+	 display: block;
+	 margin: 1em auto;
+
+	 font-weight: 900;
+	 letter-spacing: 4px;
+
+	 font-family: "Bagel Fat One", "Arial Rounded MT Bold", "Helvetica Rounded", Helvetica, Arial, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, Cantarell, Oxygen-Sans, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+	 -webkit-text-stroke: 6px rgba(0,0,0,0.3);
+	 text-stroke: 6px rgba(0,0,0,0.3);
+
+	 background: linear-gradient(
+		 to right,
+		 #ee82ee, /* Violet */
+		 #663382, /* Indigo */
+		 #6699ff, /* Blue */
+		 #338066, /* Green */
+		 #ffff66, /* Yellow */
+		 #ffa566, /* Orange */
+		 #ff3300, /* Red */
+		 #ffa566, /* Orange */
+		 #ffff66, /* Yellow */
+		 #338066, /* Green */
+		 #6699ff, /* Blue */
+		 #663382, /* Indigo */
+		 #ee82ee  /* Violet */
+	 );
+	 background-size: 200% auto;
+
+	 color: transparent;
+	 background-clip: text;
+	 -webkit-background-clip: text;
+
+	 animation: shimmer 12s linear infinite;
+}
+
+@keyframes shimmer {
+	 to {
+		 background-position: -200% center;
+	 }
+}
+
+h1.hero span:nth-child(7),
+h1.hero span:nth-child(8),
+h1.hero span:nth-child(9),
+h1.hero span:nth-child(10) {
+	 color: silver;
+	 -webkit-text-stroke: 6px #999;
+	 text-stroke: 6px #999;
+}
+
+/* ================================================================================ */
+/* Light/dark themes. */
+
+@media (prefers-color-scheme: dark) {
+	body {
+		background: black;
+	}
+	h1.hero span:nth-child(7),
+	h1.hero span:nth-child(8),
+	h1.hero span:nth-child(9),
+	h1.hero span:nth-child(10) {
+		color: #555;
+		-webkit-text-stroke: 6px #333;
+		text-stroke: 6px #333;
+	 }
+}
+
+/* ================================================================================ */
+
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <h1 class="hero"><span class="">t</span><span class="">r</span><span class="">i</span><span class="">v</span><span class="">i</span><span class="">a</span><span class="">.</span><span class="">l</span><span class="">t</span><span class="">d</span></h1>
+        </div>
+      </div>
+    </div><!-- container -->
+
+    <!-- Automatic polyfills for many features/browsers -->
+    <script async>
+      if ((navigator || {}).onLine) {
+          if ((((window || {}).location || {}).href || {}).startsWith("http")) {
+              var p = document.createElement('script');
+              p.src = "//cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?version=4.8.0&features=default";
+              p.async = true;
+              p.defer = true;
+              p.setAttribute('crossorigin','anonymous')
+              document.head.appendChild(p);
+          }
+      }
+    </script>
+
+  </body>
+</html>
