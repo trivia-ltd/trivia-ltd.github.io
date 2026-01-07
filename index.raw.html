@@ -6,9 +6,6 @@
     <!-- Disable 300ms delay in Chrome and Firefox -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<link rel="preconnect" href="https://fonts.bunny.net">
-	<link href="https://fonts.bunny.net/css?family=bagel-fat-one:400" rel="stylesheet" />
-
     <!-- HTML5shiv: HTML5 elements for older versions of IE -->
     <!-- respond.js: media-queries for older versions of IE -->
     <!--[if lt IE 9]>
@@ -20,355 +17,832 @@
     <title>trivia.ltd</title>
 
     <style>
-/* Disable 300 millisecond delay in IE */
-html{touch-action:manipulation;-ms-touch-action:manipulation}
+	 /* Disable 300 millisecond delay in IE */
+	 html{touch-action:manipulation;-ms-touch-action:manipulation}
 
-/* Remove default margin */
-/* h1, h2, h3, h4, p, ul[class], ol[class], li, figure, figcaption, blockquote, dl, dd */
-h1, h2, p, ul[class], ol[class], li, {
-    margin: 0;
-}
+	 /* Remove default margin */
+	 /* h1, h2, h3, h4, p, ul[class], ol[class], li, figure, figcaption, blockquote, dl, dd */
+	 h1, h2, p, ul[class], ol[class], li, {
+		 margin: 0;
+	 }
 
-/* Normalize */
+	 /* Normalize */
 
-/* [type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring,button:-moz-focusring{outline:1px dotted ButtonText;outline-offset:-2px}h1{margin:.67em 0} */
-html {
-    line-height:1.15;
-    -webkit-text-size-adjust:100%
-}
+	 /* [type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring,button:-moz-focusring{outline:1px dotted ButtonText;outline-offset:-2px}h1{margin:.67em 0} */
+	 html {
+		 line-height:1.15;
+		 -webkit-text-size-adjust:100%
+	 }
 
-body {
-    margin:0;
-    /* height: 175vh; */
-}
+	 body {
+		 margin:0;
+		 /* height: 175vh; */
+	 }
 
-/*
-main {
-    display:block
-}
+	 /*
+		main {
+		display:block
+		}
+	  */
+
+	 /*
+		hr {
+		box-sizing:content-box;height:0;overflow:visible
+		}
+	  */
+
+	 pre {
+		 font-family: monospace, monospace;
+	 }
+
+	 a {
+		 background-color:transparent
+	 }
+
+	 /*
+		abbr[title] {
+		border-bottom:none;text-decoration:underline;text-decoration:underline dotted
+		}
+	  */
+
+	 b, strong {
+		 font-weight:bolder
+	 }
+
+	 /*
+		code, kbd, samp {
+		font-family:monospace,monospace;font-size:1em
+		}
+
+		small {
+		font-size:80%
+		}
+
+		sub, sup {
+		font-size:75%;line-height:0;position:relative;vertical-align:baseline
+		}
+
+		sub {
+		bottom:-.25em
+		}
+
+		sup {
+		top:-.5em
+		}
+
+		img {
+		border-style:none
+		}
+
+		button, input, optgroup, select, textarea {
+		font-family:inherit;font-size:100%;line-height:1.15;margin:0
+		}
+
+		button, input {
+		overflow:visible
+		}
+
+		button, select {
+		text-transform:none
+		}
+
+		[type=button], [type=reset], [type=submit],button {
+		-webkit-appearance:button
+		}
+
+		fieldset {
+		padding:.35em .75em .625em
+		}
+
+		legend {
+		box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal
+		}
+
+		progress {
+		vertical-align:baseline
+		}
+
+		textarea {
+		overflow:auto
+		}
+
+		[type=checkbox], [type=radio] {
+		box-sizing:border-box;padding:0
+		}
+
+		[type=number]::-webkit-inner-spin-button, [type=number]::-webkit-outer-spin-button {
+		height:auto
+		}
+
+		[type=search] {
+		-webkit-appearance:textfield;outline-offset:2px
+		}
+
+		[type=search]::-webkit-search-decoration {
+		-webkit-appearance:none
+		}
+
+		::-webkit-file-upload-button {
+		-webkit-appearance:button;font:inherit
+		}
+
+		details {
+		display:block
+		}
+
+		summary {
+		display:list-item
+		}
+
+		template {
+		display:none
+		}
+
+		[hidden] {
+		display:none
+		}
 */
 
-/*
-hr {
-    box-sizing:content-box;height:0;overflow:visible
-}
-*/
+	 
+	 /* Semantic UI reset */
+	 *,*:before,*:after {
+		 box-sizing:inherit
+	 }
 
-pre {
-    font-family: monospace, monospace;
-}
+	 html {
+		 box-sizing:border-box
+	 }
 
-a {
-    background-color:transparent
-}
-
-/*
-abbr[title] {
-    border-bottom:none;text-decoration:underline;text-decoration:underline dotted
-}
-*/
-
-b, strong {
-    font-weight:bolder
-}
-
-/*
-code, kbd, samp {
-    font-family:monospace,monospace;font-size:1em
-}
-
-small {
-    font-size:80%
-}
-
-sub, sup {
-    font-size:75%;line-height:0;position:relative;vertical-align:baseline
-}
-
-sub {
-    bottom:-.25em
-}
-
-sup {
-    top:-.5em
-}
-
-img {
-    border-style:none
-}
-
-button, input, optgroup, select, textarea {
-    font-family:inherit;font-size:100%;line-height:1.15;margin:0
-}
-
-button, input {
-    overflow:visible
-}
-
-button, select {
-    text-transform:none
-}
-
-[type=button], [type=reset], [type=submit],button {
-    -webkit-appearance:button
-}
-
-fieldset {
-    padding:.35em .75em .625em
-}
-
-legend {
-    box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal
-}
-
-progress {
-    vertical-align:baseline
-}
-
-textarea {
-    overflow:auto
-}
-
-[type=checkbox], [type=radio] {
-    box-sizing:border-box;padding:0
-}
-
-[type=number]::-webkit-inner-spin-button, [type=number]::-webkit-outer-spin-button {
-    height:auto
-}
-
-[type=search] {
-    -webkit-appearance:textfield;outline-offset:2px
-}
-
-[type=search]::-webkit-search-decoration {
-    -webkit-appearance:none
-}
-
-::-webkit-file-upload-button {
-    -webkit-appearance:button;font:inherit
-}
-
-details {
-    display:block
-}
-
-summary {
-    display:list-item
-}
-
-template {
-    display:none
-}
-
-[hidden] {
-    display:none
-}
-*/
+	 input[type="text"],input[type="email"],input[type="search"],input[type="password"] {
+		 -webkit-appearance:none;-moz-appearance:none
+	 }
 
 
-/* Semantic UI reset */
-*,*:before,*:after {
-    box-sizing:inherit
-}
+	 /* ================================================================================ */
+	 /* Remove all animations and transitions for people that prefer not to see them */
 
-html {
-    box-sizing:border-box
-}
+	 @media (prefers-reduced-motion: reduce) {
+		 * {
+			 animation-duration: 0.01ms !important;
+			 animation-iteration-count: 1 !important;
+			 transition-duration: 0.01ms !important;
+			 scroll-behavior: auto !important;
+		 }
+	 }
 
-input[type="text"],input[type="email"],input[type="search"],input[type="password"] {
-    -webkit-appearance:none;-moz-appearance:none
-}
+	 /* ================================================================================ */
+	 /* Font */
+	 /* <link rel="preconnect" href="https://fonts.bunny.net"> */
+	 /* <link href="https://fonts.bunny.net/css?family=bagel-fat-one:400" rel="stylesheet" /> */
 
+	 @font-face {
+         font-family: 'Bagel Fat One';
+         src: url('trivia-ltd.woff2') format('woff2');
+         font-display: swap;
+     }
 
-/* ================================================================================ */
-/* Remove all animations and transitions for people that prefer not to see them */
-@media (prefers-reduced-motion: reduce) {
-    * {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
-    }
-}
+	 /* ================================================================================ */
 
-/* ================================================================================ */
+	 h1,h2,h3,h4,h5,h6 { padding: 0; margin: 0 auto; }
+	 html,body,div#root { position: relative; }
+	 body {
+		 background: white;
+		 overflow-y: scroll;
+		 font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, Cantarell, Oxygen-Sans, Helvetica, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+		 color: #333;
+		 letter-spacing: 1px;
+		 line-height: 2;
+		 font-size: 20px;
+	 }
 
-h1,h2,h3,h4,h5,h6 { padding: 0; margin: 0 auto; }
-html,body,div#root { position: relative; }
-body {
-    background: white;
-    overflow-y: scroll;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, Cantarell, Oxygen-Sans, Helvetica, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    color: #333;
-    letter-spacing: 1px;
-    line-height: 2;
-    font-size: 16px;
-}
+	 @media only screen and (min-width:40em) {
+		 body {
+			 font-size: 20px;
+		 }
+	 }
 
-@media only screen and (min-width:40em) {
-    body {
-        font-size: 17px;
-    }
-}
+	 @media only screen and (min-width:52em) {
+		 body {
+			 font-size: 24px;
+		 }
+	 }
 
-@media only screen and (min-width:52em) {
-    body {
-        font-size: 18px;
-    }
-}
+	 /* Inherit fonts for inputs and buttons */
+	 /*
+		input,
+		button,
+		textarea,
+		select {
+		font: inherit;
+		}
+	  */
 
-/* Inherit fonts for inputs and buttons */
-/*
-  input,
-button,
-textarea,
-select {
-    font: inherit;
-}
-*/
+	 /* ================================================================================ */
+	 /* Ungrid: https://chrisnager.github.io/ungrid/ */
 
-/* ================================================================================ */
-/* Ungrid: https://chrisnager.github.io/ungrid/ */
-.col {
-    vertical-align: top;
-}
-@media only screen and (min-width: 40em) {
-    .row { width: 100%; display: table; table-layout: fixed; }
-    .col { display: table-cell; text-align: center; }
-}
+	 .col {
+		 vertical-align: top;
+	 }
 
-p { text-align: left; }
+	 @media only screen and (min-width: 40em) {
+		 .row { width: 100%; display: table; table-layout: fixed; }
+		 .col { display: table-cell; text-align: center; }
+	 }
 
-.container {
-    margin: 0 auto 0 auto;
-    padding: 0 1em 0 1em;
-    max-width: 100%;
-}
+	 .container {
+		 margin: 0 auto 0 auto;
+		 padding: 0 1em 0 1em;
+		 max-width: 100%;
+	 }
 
-h1.hero {
-	font-size: 4.5em;
-}
+	 .container.splash {
+		 height: 100vh;
+	 }
 
-@media only screen and (min-width: 52em){
-    .container {
-        width: 50em;
-    }
-}
+	 .container.main .col {
+		 padding-bottom: 2em;
+	 }
 
-@media only screen and (min-width: 64em){
-    .container {
-        width: 59em;
-    }
+	 @media only screen and (min-width: 40em) {
+		 .container.main .row:nth-child(2),
+		 .container.main .row:nth-child(4),
+		 .container.main .row:nth-child(6),
+		 .container.main .row:nth-child(8),
+		 .container.main .row:nth-child(10) {
+			 padding-left: 2em;
+			 padding-right: 2em;
+		 }
+	 }
+
+	 @media only screen and (min-width: 52em){
+		 .container {
+			 width: 50em;
+		 }
+	 }
+
+	 @media only screen and (min-width: 64em){
+		 .container {
+			 width: 59em;
+		 }
+	 }
+
+	 @media only screen and (min-width: 80em){
+		 .container {
+			 width: 64em;
+		 }
+	 }
+
+	 @media only screen and (min-width: 100em){
+		 .container {
+			 width: 80em;
+		 }
+	 }
+
+	 /* ================================================================================ */
+	 /* Misc */
+
+	 a {
+		 color: red;
+	 }
+
+	 p { text-align: left; }
+
+	 p.strap,
+	 p.center {
+		 margin: 0 auto;
+		 text-align: center;
+	 }
+
+	 p.strap {
+		 max-width: 30em;
+		 font-weight: bold;
+		 font-size: 1.2em;
+		 margin: 0 auto 1em auto;
+	 }
+
+	 .row.links1 {
+		 padding-top: 2em;
+	 }
+	 .row.links2 {
+		 padding-bottom: 2em;
+	 }
+
+	 .row.links1 .col a,
+	 .row.links2 .col a {
+		 color: white;
+
+		 border: 2px solid;
+		 border-radius: 8px;
+		 box-shadow: 8px 8px 0px #bbb;
+		 display: block;
+		 font-weight: bold;
+		 margin: 1em 1em 2em 1em;
+		 padding: 10px;
+		 text-decoration: none;
+	 }
+
+	 /* Buy, hire, join, quality, contact ····················· */
+
+	 .col.buy,
+	 .col.contact,
+	 .col.quality,
+	 .col.hire,
+	 .col.join {
+		 padding: 10px;
+		 border: 1px solid;
+		 border-radius: 8px;
+		 font-weight: bold;
+	 }
+
+	 .col.buy h2,
+	 .col.contact h2,
+	 .col.quality h2,
+	 .col.hire h2,
+	 .col.join h2 {
+		 text-align: center;
+		 margin-left: auto;
+		 margin-right: auto;
+	 }
+
+	 .highlight.buy,
+	 .highlight.contact,
+	 .highlight.quality,
+	 .highlight.hire,
+	 .highlight.join {
+		 font-style: italic;
+		 font-weight: bold;
+		 padding: 0 0.3em;
+	 }
+
+	 /* Buy  ·················································· */
+
+	 h2.buy,
+	 .col.buy {
+		 color: #b40;
+	 }
+	 .col.buy {
+		 background: #fdb;
+		 border-color: #d60;
+	 }
+	 .row.links1 .col a.buy {
+		 background-color: #d60;
+		 border-color: #b40;
+	 }
+	 .highlight.buy {
+		 background: #fdb;
+	 }
+
+	 /* Hire ·················································· */
+
+	 h2.hire,
+	 .col.hire{
+		 color: #363;
+	 }
+	 .col.hire {
+		 background: #dfd;
+		 border-color: #396;
+	 }
+	 .row.links1 .col a.hire {
+		 background-color: #396;
+		 border-color: #060;
+	 }
+
+	 /* Join ·················································· */
+
+	 h2.join,
+	 .col.join {
+		 color: #939;
+	 }
+	 .col.join {
+		 background: #fdf;
+		 border-color: #939;
+	 }
+	 .row.links1 .col a.join {
+		 background-color: #939;
+		 border-color: #303;
+	 }
+	 .highlight.join {
+		 background: #fdf;
+	 }
+
+	 /* Contact ··············································· */
+
+	 h2.contact,
+	 .col.contact {
+		 color: red;
+	 }
+	 .col.contact {
+		 background: #fed;
+		 border-color: #b40;
+	 }
+	 .row.links2 .col a.contact {
+		 background-color: #e33;
+		 border-color: #b40;
+	 }
+	 .highlight.contact {
+		 background: #fed;
+	 }
+
+	 /* Quality ··············································· */
+
+	 h2.quality,
+	 .col.quality {
+		 color: #33a;
+	 }
+	 .col.quality {
+		 background: #bcf;
+		 border-color: #66e;
+	 }
+	 .row.links2 .col a.quality {
+		 background-color: #66e;
+		 border-color: #44b;
+	 }
+	 .highlight.quality {
+		 background: #44b;
+	 }
+
+	 /* Footer ················································ */
+
+	 #footer {
+		 height: 90vh;
+		 text-align: center;
+	 }
+
+	 #footer-content {
+		 position: absolute;
+		 bottom: 0;
+		 left: 0;
+		 width: 100%;
+	 }
+
+	 #footer * {
+		 text-align: center;
+	 }
+
+	 /* ================================================================================ */
+	 /* Hero */
+
 	 h1.hero {
-		 font-size: 5em;
+		 font-size: 4.1em;
+		 text-align: center;
+		 display: block;
+		 margin: 0.25em auto 0.15em auto;
+
+		 font-weight: 900;
+		 letter-spacing: 4px;
+
+		 font-family: "Bagel Fat One", "Arial Rounded MT Bold", "Helvetica Rounded", Helvetica, Arial, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, Cantarell, Oxygen-Sans, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+		 -webkit-text-stroke: 6px rgba(0,0,0,0.3);
+		 text-stroke: 6px rgba(0,0,0,0.3);
+
+		 background: linear-gradient(
+			 to right,
+			 #ff3300, /* Red */
+			 #ffa566, /* Orange */
+			 #ffff66, /* Yellow */
+			 #338066, /* Green */
+			 #6699ff, /* Blue */
+			 #663382, /* Indigo */
+			 #ee82ee, /* Violet */
+			 #663382, /* Indigo */
+			 #6699ff, /* Blue */
+			 #338066, /* Green */
+			 #ffff66, /* Yellow */
+			 #ffa566, /* Orange */
+			 #ff3300  /* Red */
+		 );
+		 background-size: 200% auto;
+
+		 color: transparent;
+		 background-clip: text;
+		 -webkit-background-clip: text;
+
+		 animation: shimmer 12s linear infinite;
 	 }
-}
 
-@media only screen and (min-width: 80em){
-    .container {
-        width: 64em;
-    }
-	 h1.hero {
-		 font-size: 6em;
+	 @keyframes shimmer {
+		 to {
+			 background-position: -200% center;
+		 }
 	 }
-}
 
-@media only screen and (min-width: 100em){
-    .container {
-        width: 80em;
-    }
-	 h1.hero {
-		 font-size: 8em;
+	 h1.hero span {
+		 color: silver;
+		 -webkit-text-stroke: 6px #999;
+		 text-stroke: 6px #999;
 	 }
-}
 
-/* ================================================================================ */
-/* Misc */
-
-h1.hero {
-	 text-align: center;
-	 display: block;
-	 margin: 1em auto;
-
-	 font-weight: 900;
-	 letter-spacing: 4px;
-
-	 font-family: "Bagel Fat One", "Arial Rounded MT Bold", "Helvetica Rounded", Helvetica, Arial, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, Cantarell, Oxygen-Sans, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-
-	 -webkit-text-stroke: 6px rgba(0,0,0,0.3);
-	 text-stroke: 6px rgba(0,0,0,0.3);
-
-	 background: linear-gradient(
-		 to right,
-		 #ee82ee, /* Violet */
-		 #663382, /* Indigo */
-		 #6699ff, /* Blue */
-		 #338066, /* Green */
-		 #ffff66, /* Yellow */
-		 #ffa566, /* Orange */
-		 #ff3300, /* Red */
-		 #ffa566, /* Orange */
-		 #ffff66, /* Yellow */
-		 #338066, /* Green */
-		 #6699ff, /* Blue */
-		 #663382, /* Indigo */
-		 #ee82ee  /* Violet */
-	 );
-	 background-size: 200% auto;
-
-	 color: transparent;
-	 background-clip: text;
-	 -webkit-background-clip: text;
-
-	 animation: shimmer 12s linear infinite;
-}
-
-@keyframes shimmer {
-	 to {
-		 background-position: -200% center;
+	 @media only screen and (min-width: 64em){
+		 h1.hero {
+			 font-size: 5em;
+		 }
 	 }
-}
 
-h1.hero span:nth-child(7),
-h1.hero span:nth-child(8),
-h1.hero span:nth-child(9),
-h1.hero span:nth-child(10) {
-	 color: silver;
-	 -webkit-text-stroke: 6px #999;
-	 text-stroke: 6px #999;
-}
-
-/* ================================================================================ */
-/* Light/dark themes. */
-
-@media (prefers-color-scheme: dark) {
-	body {
-		background: black;
-	}
-	h1.hero span:nth-child(7),
-	h1.hero span:nth-child(8),
-	h1.hero span:nth-child(9),
-	h1.hero span:nth-child(10) {
-		color: #555;
-		-webkit-text-stroke: 6px #333;
-		text-stroke: 6px #333;
+	 @media only screen and (min-width: 80em){
+		 h1.hero {
+			 font-size: 6em;
+		 }
 	 }
-}
 
-/* ================================================================================ */
+	 @media only screen and (min-width: 100em){
+		 h1.hero {
+			 font-size: 8em;
+		 }
+	 }
+
+	 /* ================================================================================ */
+	 /* Light/dark themes. */
+
+	 @media (prefers-color-scheme: dark) {
+		 body {
+			 background: black;
+			 color: #eee;
+		 }
+		 h1.hero span {
+			 color: #555;
+			 -webkit-text-stroke: 6px #333;
+			 text-stroke: 6px #333;
+		 }
+		 .row.links1 .col a,
+		 .row.links2 .col a {
+			 box-shadow: 8px 8px 0px #666;
+		 }
+
+		 /* Buy ·················································· */
+
+		 h2.buy,
+		 .col.buy {
+			 color: #ea0;
+		 }
+		 .col.buy {
+			 background: #420;
+			 border-color: #d60;
+		 }
+		 .highlight.buy {
+			 background: #420;
+			 color: #ea0;
+		 }
+
+		 /* Contact ·············································· */
+
+		 h2.contact,
+		 .col.contact {
+			 color: #ea0;
+		 }
+		 .col.contact {
+			 background: #420;
+			 border-color: #d60;
+		 }
+		 .highlight.contact {
+			 background: #420;
+			 color: #ea0;
+		 }
+
+		 /* Hire ················································· */
+
+		 h2.hire,
+		 .col.hire{
+			 color: #7d7;
+		 }
+		 .col.hire {
+			 background: #030;
+			 border-color: #396;
+		 }
+
+		 /* Join ················································· */
+
+		 h2.join,
+		 .col.join {
+			 color: #e8e;
+		 }
+		 .col.join {
+			 background: #202;
+			 border-color: #939;
+		 }
+		 .highlight.join {
+			 background-color: #525;
+			 color: #e8e;
+		 }
+
+		 /* Quality ·············································· */
+
+		 h2.quality,
+		 .col.quality {
+			 color: #6af;
+		 }
+		 .col.quality {
+			 background: #004;
+			 border-color: #6af;
+		 }
+		 .highlight.quality {
+			 background: #004;
+			 color: #6af;
+		 }
+
+		 /* Contact ·············································· */
+
+		 h2.contact,
+		 .col.contact {
+			 color: #e33;
+		 }
+		 .col.contact {
+			 background: #300;
+			 border-color: #e33;
+		 }
+		 .highlight.contact {
+			 background: #300;
+			 color: #e33;
+		 }
+
+	 }
+
+	 /* ================================================================================ */
 
     </style>
   </head>
 
   <body>
-    <div class="container">
+    <div class="container splash">
       <div class="row">
         <div class="col">
-          <h1 class="hero"><span class="">t</span><span class="">r</span><span class="">i</span><span class="">v</span><span class="">i</span><span class="">a</span><span class="">.</span><span class="">l</span><span class="">t</span><span class="">d</span></h1>
+          <h1 class="hero">trivia<span>.ltd</span></h1>
         </div>
-      </div>
+      </div><!-- row -->
+
+	  <div class="row">
+		  <div class="col">
+			  <p class="strap">
+				  Bespoke, hand-written quizzes and trivia for your pub&nbsp;nights, parties, social&nbsp;gatherings, and corporate&nbsp;events.
+			  </p>
+		  </div>
+	  </div><!-- row -->
+
+	  <div class="row links1">
+		  <div class="col">
+			  <p class="center">
+				  <a href="#hire" class="hire">Hire&nbsp;us</a>
+			  </p>
+		  </div>
+
+		  <div class="col">
+			  <p class="center">
+				  <a href="#join" class="join">Join&nbsp;us</a>
+			  </p>
+		  </div>
+
+	  	  <div class="col">
+			  <p class="center">
+				  <a href="#buy" class="buy">Buy&nbsp;a&nbsp;quiz</a>
+			  </p>
+		  </div>
+
+	  </div><!-- row -->
+
+	  <div class="row links2">
+		  <div class="col"></div>
+
+		  <div class="col">
+			  <p class="center">
+				  <a href="#quality" class="quality">Quality</a>
+			  </p>
+		  </div>
+
+	  	  <div class="col">
+			  <p class="center">
+				  <a href="#contact" class="contact">Contact&nbsp;us</a>
+			  </p>
+		  </div>
+
+	  	  <div class="col"></div>
+	  </div><!-- row -->
+
+	</div><!-- container -->
+
+	<div class="container main">
+
+		<div class="row">
+			<div class="col hire">
+				<a name="hire"></a>
+				<h2 class="hire">Hire us</h2>
+				<p class="center">
+					With over three years' experience in delivering quizzes in pubs and venues across London, you can trust us to entertain your friends, customers, and clients.
+				</p>
+			</div>
+		</div><!-- row -->
+
+		<div class="row">
+			<div class="col">
+				<p>
+					One of our team will arrive at your venue and deliver a quiz. Average running time is approximately 2 hours, including a 10 minute break at half-time. Prize winners will receive up to £100 cash or by bank transfer. We recommend you also arrange one other prize at half-time, such as a bottle of wine.
+				</p>
+				<p>
+					Prices start at £120.
+			</div>
+		</div><!-- row -->
+
+		<div class="row">
+			<div class="col join">
+				<a name="join"></a>
+				<h2 class="join">Join us</h2>
+				<p class="center">
+					Earn regular income by hosting a quiz at one of our partner venues.
+				</p>
+			</div>
+		</div><!-- row -->
+
+		<div class="row">
+			<div class="col">
+				<p>
+					Earn £50 in just two hours. Work at a location that is convenient to you. All equipment is provided for you. Minimum commitment is just one evening per week.
+				</p>
+				<p>
+					<span class="highlight join">Want to write questions for us?</span> Get in touch and let's talk!
+				</p>
+			</div>
+		</div><!-- row -->
+
+		<div class="row">
+			<div class="col buy">
+				<a name="buy"></a>
+				<h2 class="buy">Buy a quiz</h2>
+				<p class="center">
+					If you want to deliver a quiz yourself, you can purchase one from us or order in advance. Bespoke options are also available.
+				</p>
+			</div>
+		</div><!-- row -->
+
+		<div class="row">
+			<div class="col">
+				<p>
+					Each quiz is comprised of 50 questions with pictures and puzzles. There is a one-time fee of £100, then each quiz costs £40.
+				</p>
+				<p>
+					<span class="highlight buy">Need a bespoke quiz written just for you?</span> No problem! Prices start at £150 + VAT.
+				</p>
+			</div>
+		</div><!-- row -->
+
+		<div class="row">
+			<div class="col quality">
+				<a name="quality"></a>
+				<h2 class="quality">Quality assured</h2>
+				<p class="center">
+					Our quizzes are hand-written and quality-checked by humans, not robots.
+				</p>
+			</div>
+		</div><!-- row -->
+
+		<div class="row">
+			<div class="col">
+				<p>
+					AI can be wonderful but nothing beats the human touch! Our quizzes are hand-crafted, ensuring they appeal to your audience. We respond to feedback and tailor our quizzes in response, and you get personal access to our quiz-writing team to discuss your needs.
+				</p>
+			</div>
+		</div><!-- row -->
+
+		<div class="row">
+			<div class="col contact">
+				<a name="contact"></a>
+				<h2 class="contact">Contact us</h2>
+				<p class="center">
+					Get in touch with any questions, we're happy to help.
+				</p>
+			</div>
+		</div><!-- row -->
+
+		<div class="row">
+			<div class="col">
+				<div class="row">
+					<div class="col"></div>
+					<div class="col" style="width:35%; margin: 0 auto;">
+						<p class="center">
+							Email:<br/>
+							<a href="mailto:hello@trivia.ltd" style="font-size: 1.3em">hello@trivia.ltd</a>
+						</p>
+					</div>
+					<div class="col" style="width:35%; margin: 0 auto;">
+						<p class="center">
+							WhatsApp:<br/>
+							<a href="https://whatsapp.com/channel/0029VbBUerC5Ui2PrDnJcq0M" width="164" height="164"><img src="trivia-ltd-qr.png"></a>
+							<br/>
+							<a href="https://whatsapp.com/channel/0029VbBUerC5Ui2PrDnJcq0M" style="color:green; display: inline-block; line-height:1.2 !important;">https://&#8288;whatsapp&ZeroWidthSpace;.&#8288;com/channel/&ZeroWidthSpace;0029VbBUerC5U&ZeroWidthSpace;i2PrDnJcq0M</a>
+						</p>
+					</div>
+					<div class="col"></div>
+				</div><!-- row -->
+			</div>
+		</div><!-- row -->
+
     </div><!-- container -->
+
+	<div id="footer">
+		<div id="footer-content">
+			<p>
+				(c) trivia.ltd
+			</p>
+		</div>
+	</div>
 
     <!-- Automatic polyfills for many features/browsers -->
     <script async>
