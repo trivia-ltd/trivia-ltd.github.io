@@ -16,6 +16,8 @@
 
     <title>trivia.ltd</title>
 
+	<link href="altcha.min.css" rel="stylesheet" />
+
     <style>
 	 /* Disable 300 millisecond delay in IE */
 	 html{touch-action:manipulation;-ms-touch-action:manipulation}
@@ -163,7 +165,6 @@
 		}
 */
 
-	 
 	 /* Semantic UI reset */
 	 *,*:before,*:after {
 		 box-sizing:inherit
@@ -658,6 +659,17 @@
 	 }
 
 	 /* ================================================================================ */
+	 /* Altcha */
+
+	 .altcha {
+		 margin: 0 auto;
+	 }
+
+	 #challenge {
+		 margin-top: 1em;
+	 }
+
+	 /* ================================================================================ */
 
     </style>
   </head>
@@ -778,7 +790,7 @@
 					Each quiz is comprised of 50 questions with pictures and puzzles. There is a one-time fee of £100, then each quiz costs £40.
 				</p>
 				<p>
-					<span class="highlight buy">Need a bespoke quiz written just for you?</span> No problem! Prices start at £150 + VAT.
+					<span class="highlight buy">Need a bespoke quiz written just for you?</span> No problem! Prices start at £150.
 				</p>
 			</div>
 		</div><!-- row -->
@@ -813,16 +825,27 @@
 
 		<div class="row">
 			<div class="col">
+				<p class="center" id="challenge">
+					Prove you're human and we can talk! 😄️<br/>
+					<script async defer src="altcha-original.min.js" type="module"></script>
+					<altcha-widget challengeurl="https://tight-moon-973b.personal-427.workers.dev/challenge"></altcha-widget>
+				</p>
+			</div>
+		</div>
+
+
+		<div class="row">
+			<div class="col">
 				<div class="row">
 					<div class="col"></div>
 					<div class="col" style="width:35%; margin: 0 auto;">
-						<p class="center">
+						<p class="center" id="email" style="display:none; visibility:hidden">
 							Email:<br/>
 							<a href="mailto:hello@trivia.ltd" style="font-size: 1.3em">hello@trivia.ltd</a>
 						</p>
 					</div>
 					<div class="col" style="width:35%; margin: 0 auto;">
-						<p class="center">
+						<p class="center" id="whatsapp" style="display:none; visibility:hidden">
 							WhatsApp:<br/>
 							<a href="https://whatsapp.com/channel/0029VbBUerC5Ui2PrDnJcq0M" width="164" height="164"><img src="trivia-ltd-qr.png"></a>
 							<br/>
@@ -843,6 +866,26 @@
 			</p>
 		</div>
 	</div>
+
+	<script>
+	 document.querySelector('altcha-widget').addEventListener('verified', async (e) => {
+		 const res = await fetch('https://tight-moon-973b.personal-427.workers.dev/verify', {
+			 method: 'POST',
+			 body: JSON.stringify({ altcha: e.detail.payload })
+		 });
+		 const data = await res.json();
+		 if (data.success) {
+			 document.getElementById("email").style.display = "block";
+			 document.getElementById("email").style.visibility = "visible";
+
+			 document.getElementById("whatsapp").style.display = "block";
+			 document.getElementById("whatsapp").style.visibility = "visible";
+
+			 document.getElementById("challenge").style.display = "none";
+			 document.getElementById("challenge").style.visibility = "hidden";
+		 }
+	 });
+	</script>
 
     <!-- Automatic polyfills for many features/browsers -->
     <script async>
