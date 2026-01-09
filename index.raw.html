@@ -823,9 +823,11 @@
 			</div>
 		</div><!-- row -->
 
-		<div class="row">
+		<div class="row" id="challenge">
 			<div class="col">
+				<p class="center" style="text-align:center">
 					Prove you're not a robot so we can talk! 😄️<br/>
+					This may take a few seconds, sit tight...<br/>
 					<script async defer src="altcha.min.js" type="module"></script>
 					<altcha-widget challengeurl="https://tight-moon-973b.personal-427.workers.dev/challenge"></altcha-widget>
 				</p>
@@ -846,7 +848,7 @@
 					<div class="col" style="width:35%; margin: 0 auto;">
 						<p class="center" id="whatsapp" style="display:none; visibility:hidden">
 							WhatsApp:<br/>
-							<a href="" width="200" height="200" id="whatsapp-link"><img src="" id="whatsapp-qr-code"></a>
+							<a href="" width="200" height="200" id="whatsapp-qr-link"><img src="" id="whatsapp-qr-code"></a>
 							<br/>
 							<a href="" style="color:green; display: inline-block; line-height:1.2 !important;" id="whatsapp-url-link"></a>
 						</p>
@@ -867,10 +869,43 @@
 	</div>
 
 	<script>
-	 function isMobile() {
-		 const regex = /Mobi|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
-		 return regex.test(navigator.userAgent) || 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+	 // function isMobile() {
+	 //	 const regex = /mobi|android|webos|ios|iphone|ipad|ipod|blackberry|iemobile|opera mini/i;
+	 //	 return regex.test(navigator.userAgent) || 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+	 // }
+	 function fallbackLink(elem, appLink, webLink) {
+		 elem.addEventListener("click", function(e) {
+			 e.preventDefault(); // Stop the default link click
+
+			 let appOpened = false;
+
+			 // 1. Listen for the page being hidden (app successfully opened)
+			 const checkVisibility = () => {
+				 if (document.hidden || document.webkitHidden) {
+					 appOpened = true;
+				 }
+			 };
+			 document.addEventListener("visibilitychange", checkVisibility);
+
+			 // 2. Attempt to open the app scheme i.e. whatsapp://
+			 window.location.href = appLink;
+
+			 // 3. Fallback after a short delay if focus wasn't lost
+			 setTimeout(() => {
+				 if (!appOpened) {
+					 // App likely not installed, update link and redirect
+					 elem.href = webLink;
+					 window.location.href = webLink;
+				 }
+				 // Clean up listener
+				 document.removeEventListener("visibilitychange", checkVisibility);
+			 }, 1000); 
+		 });
+
+		 // Default the link to the web version for non-mobile/initial state
+		 elem.href = webLink;
 	 }
+
 	 document.querySelector('altcha-widget').addEventListener('verified', async (e) => {
 		 const res = await fetch('https://tight-moon-973b.personal-427.workers.dev/verify', {
 			 method: 'POST',
@@ -878,27 +913,43 @@
 		 });
 		 const data = await res.json();
 		 if (data.success) {
-			 const mobile = isMobile();
-			 // console.log(data);
+			 // const mobile = isMobile();
+			 document.getElementById("email").style.setProperty("display", "block");
+			 document.getElementById("email").style.setProperty("visibility", "visible");
 
-			 document.getElementById("email").style.display = "block";
-			 document.getElementById("email").style.visibility = "visible";
+			 document.getElementById("whatsapp").style.setProperty("display", "block");
+			 document.getElementById("whatsapp").style.setProperty("visibility", "visible");
 
-			 document.getElementById("whatsapp").style.display = "block";
-			 document.getElementById("whatsapp").style.visibility = "visible";
-
-			 document.getElementById("challenge").style.display = "none";
-			 document.getElementById("challenge").style.visibility = "hidden";
+			 var c = document.getElementById("challenge");
+			 if (c !== null) {
+				 c.style.setProperty("display", "none");
+				 c.style.setProperty("visibility", "hidden");
+			 }
 
 			 document.getElementById("email-address").href = "mailto:" + data.email;
 			 document.getElementById("email-address").text = data.email;
 
-		 	 document.getElementById("whatsapp-link").href = data.whatsapp.url;
-
 			 document.getElementById("whatsapp-qr-code").src = "data:image/png;base64," + data.whatsapp.qr;
 
-		 	 document.getElementById("whatsapp-url-link").text = data.whatsapp.url.replace(".me/", ".me/" + "\u200B");
-		 	 document.getElementById("whatsapp-url-link").href = mobile ? data.whatsapp.deeplink : data.whatsapp.url;
+		 	 document.getElementById("whatsapp-url-link").text = data.whatsapp.url.replace(".me/", ".me/" + "\u200B")
+
+			 var qrLink = document.getElementById("whatsapp-qr-link");
+			 var urlLink = document.getElementById("whatsapp-url-link");
+
+			 qrLink.href = data.whatsapp.deeplink;
+			 urlLink.href = data.whatsapp.deeplink;
+
+			 fallbackLink(
+				 qrLink,
+				 data.whatsapp.deeplink,
+				 data.whatsapp.url
+			 );
+
+			 fallbackLink(
+		 		 urlLink,
+				 data.whatsapp.deeplink,
+				 data.whatsapp.url
+			 )
 		 }
 	 });
 	</script>
