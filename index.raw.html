@@ -826,8 +826,8 @@
 		<div class="row">
 			<div class="col">
 				<p class="center" id="challenge">
-					Prove you're human and we can talk! 😄️<br/>
-					<script async defer src="altcha-original.min.js" type="module"></script>
+					Prove you're not a roboto so we can talk! 😄️<br/>
+					<script async defer src="altcha.min.js" type="module"></script>
 					<altcha-widget challengeurl="https://tight-moon-973b.personal-427.workers.dev/challenge"></altcha-widget>
 				</p>
 			</div>
@@ -841,15 +841,15 @@
 					<div class="col" style="width:35%; margin: 0 auto;">
 						<p class="center" id="email" style="display:none; visibility:hidden">
 							Email:<br/>
-							<a href="mailto:hello@trivia.ltd" style="font-size: 1.3em">hello@trivia.ltd</a>
+							<a href="" style="font-size: 1.3em" id="email-address"></a>
 						</p>
 					</div>
 					<div class="col" style="width:35%; margin: 0 auto;">
 						<p class="center" id="whatsapp" style="display:none; visibility:hidden">
 							WhatsApp:<br/>
-							<a href="https://whatsapp.com/channel/0029VbBUerC5Ui2PrDnJcq0M" width="164" height="164"><img src="trivia-ltd-qr.png"></a>
+							<a href="" width="200" height="200" id="whatsapp-link"><img src="" id="whatsapp-qr-code"></a>
 							<br/>
-							<a href="https://whatsapp.com/channel/0029VbBUerC5Ui2PrDnJcq0M" style="color:green; display: inline-block; line-height:1.2 !important;">https://&#8288;whatsapp&ZeroWidthSpace;.&#8288;com/channel/&ZeroWidthSpace;0029VbBUerC5U&ZeroWidthSpace;i2PrDnJcq0M</a>
+							<a href="" style="color:green; display: inline-block; line-height:1.2 !important;" id="whatsapp-url-link"></a>
 						</p>
 					</div>
 					<div class="col"></div>
@@ -868,6 +868,10 @@
 	</div>
 
 	<script>
+	 function isMobile() {
+		 const regex = /Mobi|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
+		 return regex.test(navigator.userAgent) || 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+	 }
 	 document.querySelector('altcha-widget').addEventListener('verified', async (e) => {
 		 const res = await fetch('https://tight-moon-973b.personal-427.workers.dev/verify', {
 			 method: 'POST',
@@ -875,6 +879,9 @@
 		 });
 		 const data = await res.json();
 		 if (data.success) {
+			 const mobile = isMobile();
+			 // console.log(data);
+
 			 document.getElementById("email").style.display = "block";
 			 document.getElementById("email").style.visibility = "visible";
 
@@ -883,6 +890,16 @@
 
 			 document.getElementById("challenge").style.display = "none";
 			 document.getElementById("challenge").style.visibility = "hidden";
+
+			 document.getElementById("email-address").href = "mailto:" + data.email;
+			 document.getElementById("email-address").text = data.email;
+
+		 	 document.getElementById("whatsapp-link").href = data.whatsapp.url;
+
+			 document.getElementById("whatsapp-qr-code").src = "data:image/png;base64," + data.whatsapp.qr;
+
+		 	 document.getElementById("whatsapp-url-link").text = data.whatsapp.url.replace(".me/", ".me/" + "\u200B");
+		 	 document.getElementById("whatsapp-url-link").href = mobile ? data.whatsapp.deeplink : data.whatsapp.url;
 		 }
 	 });
 	</script>
