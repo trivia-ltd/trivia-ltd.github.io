@@ -15,5 +15,5 @@ while read f ; do
 	echo "${a} -> ${b}"
     minify --type html --html-keep-document-tags --html-keep-end-tags "${a}" > "${b}"
 	echo ""
-done < <(git status --short --porcelain | ag '^( M|\?\?)' | sed -re 's/^( M|\?\?) //g' | ag '\.raw\.html$' | sort --human)
+done < <(git status --short --porcelain | ag '^( |A)(M|\?\?)' | sed -re 's/^(.M|\?\?) //g' | ag '\.raw\.html$' | sort --human)
 # done < <(find "${wd}" -name index.raw.html)
