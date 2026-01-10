@@ -462,6 +462,23 @@
 		 background: #44b;
 	 }
 
+	 /* Hidden contact details ································ */
+
+	 @media only screen and (min-width:52em) {
+		 .col.contact-details {
+			 width: 35%;
+			 margin: 0 auto;
+		 }
+		 .col.contact-details.email {
+			 min-width: 200px;
+		 }
+	 }
+
+	 #email-address {
+		 line-height: 1;
+		 display: inline-block;
+	 }
+
 	 /* Footer ················································ */
 
 	 #footer {
@@ -833,8 +850,8 @@
 		<div class="row" id="challenge">
 			<div class="col">
 				<p class="center" style="text-align:center">
-					Prove you're not a robot so we can talk! 😄️<br/>
-					This may take a few seconds, sit tight...<br/>
+					If you're not a robot, let's talk! 😄️<br/>
+					This may take a few seconds, check the box and sit tight...<br/>
 					<script async defer src="altcha.min.js" type="module"></script>
 					<altcha-widget challengeurl="https://tight-moon-973b.personal-427.workers.dev/challenge"></altcha-widget>
 				</p>
@@ -846,13 +863,13 @@
 			<div class="col">
 				<div class="row">
 					<div class="col"></div>
-					<div class="col" style="width:35%; margin: 0 auto;">
+					<div class="col contact-details email">
 						<p class="center" id="email" style="display:none; visibility:hidden">
 							Email:<br/>
 							<a href="" style="font-size: 1.3em" id="email-address"></a>
 						</p>
 					</div>
-					<div class="col" style="width:35%; margin: 0 auto;">
+					<div class="col contact-details">
 						<p class="center" id="whatsapp" style="display:none; visibility:hidden">
 							WhatsApp:<br/>
 							<a href="" width="200" height="200" id="whatsapp-qr-link"><img src="" id="whatsapp-qr-code"></a>
@@ -876,10 +893,6 @@
 	</div>
 
 	<script>
-	 // function isMobile() {
-	 //	 const regex = /mobi|android|webos|ios|iphone|ipad|ipod|blackberry|iemobile|opera mini/i;
-	 //	 return regex.test(navigator.userAgent) || 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-	 // }
 	 function fallbackLink(elem, appLink, webLink) {
 		 elem.addEventListener("click", function(e) {
 			 e.preventDefault(); // Stop the default link click
@@ -913,52 +926,80 @@
 		 elem.href = webLink;
 	 }
 
-	 document.querySelector('altcha-widget').addEventListener('verified', async (e) => {
-		 const res = await fetch('https://tight-moon-973b.personal-427.workers.dev/verify', {
-			 method: 'POST',
-			 body: JSON.stringify({ altcha: e.detail.payload })
-		 });
-		 const data = await res.json();
-		 if (data.success) {
-			 // const mobile = isMobile();
-			 document.getElementById("email").style.setProperty("display", "block");
-			 document.getElementById("email").style.setProperty("visibility", "visible");
+	 function hideAltcha() {
+		 var c = document.getElementById("challenge");
+		 if (c !== null) {
+			 c.style.setProperty("display", "none");
+			 c.style.setProperty("visibility", "hidden");
+		 }
+	 }
 
-			 document.getElementById("whatsapp").style.setProperty("display", "block");
-			 document.getElementById("whatsapp").style.setProperty("visibility", "visible");
+	 function showContactDetails(data) {
+		 document.getElementById("email").style.setProperty("display", "block");
+		 document.getElementById("email").style.setProperty("visibility", "visible");
 
-			 var c = document.getElementById("challenge");
-			 if (c !== null) {
-				 c.style.setProperty("display", "none");
-				 c.style.setProperty("visibility", "hidden");
-			 }
+		 document.getElementById("whatsapp").style.setProperty("display", "block");
+		 document.getElementById("whatsapp").style.setProperty("visibility", "visible");
 
-			 document.getElementById("email-address").href = "mailto:" + data.email;
-			 document.getElementById("email-address").text = data.email;
+		 document.getElementById("email-address").href = "mailto:" + data.email;
+		 document.getElementById("email-address").text = data.email.replace("@", "@" + "\u200B");
 
-			 document.getElementById("whatsapp-qr-code").src = "data:image/png;base64," + data.whatsapp.qr;
+		 document.getElementById("whatsapp-qr-code").src = "data:image/png;base64," + data.whatsapp.qr;
 
-		 	 document.getElementById("whatsapp-url-link").text = data.whatsapp.url.replace(".me/", ".me/" + "\u200B")
+		 document.getElementById("whatsapp-url-link").text = data.whatsapp.url.replace(".me/", ".me/" + "\u200B")
 
-			 var qrLink = document.getElementById("whatsapp-qr-link");
-			 var urlLink = document.getElementById("whatsapp-url-link");
+		 var qrLink = document.getElementById("whatsapp-qr-link");
+		 var urlLink = document.getElementById("whatsapp-url-link");
 
-			 qrLink.href = data.whatsapp.deeplink;
-			 urlLink.href = data.whatsapp.deeplink;
+		 qrLink.href = data.whatsapp.deeplink;
+		 urlLink.href = data.whatsapp.deeplink;
 
-			 fallbackLink(
-				 qrLink,
-				 data.whatsapp.deeplink,
-				 data.whatsapp.url
-			 );
+		 fallbackLink(
+			 qrLink,
+			 data.whatsapp.deeplink,
+			 data.whatsapp.url
+		 );
 
-			 fallbackLink(
-		 		 urlLink,
-				 data.whatsapp.deeplink,
-				 data.whatsapp.url
-			 )
+		 fallbackLink(
+		 	 urlLink,
+			 data.whatsapp.deeplink,
+			 data.whatsapp.url
+		 );
+	 }
+
+	 // Check if contact details are already in localStorage.
+	 window.addEventListener('load', () => {
+		 const data = JSON.parse(localStorage.getItem('data'));
+
+		 // Only trust data if it's less than one week old.
+		 const oneWeek = 7 * 24 * 60 * 60 * 1000;
+
+		 if (data && (Date.now() - data.timestamp < oneWeek)) {
+			 hideAltcha();
+			 showContactDetails(data);
+		 } else {
+			 document.querySelector('altcha-widget').addEventListener('verified', async (e) => {
+				 const res = await fetch('https://tight-moon-973b.personal-427.workers.dev/verify', {
+					 method: 'POST',
+					 body: JSON.stringify({ altcha: e.detail.payload })
+				 });
+				 const data = await res.json();
+				 if (data.success) {
+					 hideAltcha();
+					 showContactDetails(data);
+					 localStorage.setItem(
+						 "data",
+						 JSON.stringify({
+							 "email": data.email,
+							 "whatsapp": data.whatsapp,
+							 "timestamp": Date.now(),
+						 })
+					 );
+				 }
+			 });
 		 }
 	 });
+
 	</script>
 
     <!-- Automatic polyfills for many features/browsers -->
