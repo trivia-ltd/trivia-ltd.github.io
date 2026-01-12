@@ -1,0 +1,41 @@
+#!/bin/bash
+
+set -euo pipefail
+
+this_dir=$(readlink -qe "$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )")
+wd=$(readlink -qe "${this_dir}"/../)
+
+cd "${wd}"
+
+current_branch=$(git branch --show-current)
+publish_branch=main
+
+git checkout "${publish_branch}" || {
+	echo "Could not checkout branch ${publish_branch}"
+	echo "Quitting!"
+	exit 1
+}
+
+while read f ; do
+    git restore --source "${current_branch}" "${f}"
+done < <(git ls-tree --full-tree -r --name-only "${publish_branch}" | ag '\.(css|html|ico|js|png|xml)$' | ag -v '\.raw.html$')
+
+git add .
+
+{
+    git commit -m "Latest site $(date)"
+} || {
+    echo "Nothing to do!"
+    git checkout "${current_branch}"
+    exit 0
+}
+
+{
+    git push
+} || {
+    echo "Nothing to do!"
+    git checkout "${current_branch}"
+    exit 0
+}
+
+git checkout "${current_branch}"
