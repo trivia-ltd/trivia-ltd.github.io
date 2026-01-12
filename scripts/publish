@@ -7,6 +7,12 @@ wd=$(readlink -qe "${this_dir}"/../)
 
 cd "${wd}"
 
+./scripts/build || {
+	echo "Could not build site!"
+	echo "Quitting!"
+	exit 1
+}
+
 current_branch=$(git branch --show-current)
 publish_branch=main
 
