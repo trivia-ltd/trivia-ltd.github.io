@@ -8,7 +8,7 @@ wd=$(readlink -qe "${this_dir}"/../)
 cd "${wd}"
 
 while read f ; do
-    # echo "${f}"
+    echo "Checking ${f}..."
     d=$(dirname "${f}")
     b="${d}"/index.html
     a="${d}"/$(basename "${f}")
@@ -16,4 +16,3 @@ while read f ; do
     minify --type html --html-keep-document-tags --html-keep-end-tags "${a}" > "${b}"
 	echo ""
 done < <(git status --short --porcelain | ag '^( |A)(M|\?\?)' | sed -re 's/^(.M|\?\?) //g' | ag '\.raw\.html$' | sort --human)
-# done < <(find "${wd}" -name index.raw.html)
